@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.ultra.fitness.nutritions.service.UserService;
+import com.ultra.fitness.nutritions.utils.Constants;
 
 import common.beans.User;
 
@@ -35,7 +36,7 @@ public class UserController {
 	@PostMapping
 	public String userSignUp(@ModelAttribute("user") User user) {
 		String response = userService.userSignUp(user);
-		if ("100".equalsIgnoreCase(response)) {
+		if (Constants.SUCCESS_RESPONSE.equalsIgnoreCase(response)) {
 			return "redirect:/user?success";
 		}
 		return "redirect:/user?fail";

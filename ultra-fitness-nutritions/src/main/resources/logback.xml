@@ -1,0 +1,61 @@
+<configuration debug="false">
+	
+	<property name="DEV_HOME" value="/web-apps/ultra-fitness/logs" />
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>
+				 [%date] [%-5level] [%thread] %logger{40} - %message%n
+			</pattern>
+		</encoder>
+	</appender>
+	
+	<logger name="com.ultra.fitness.nutritions.controllers" level="INFO" />
+	
+	<appender name="com.ultra.fitness.nutritions.controllers" class="ch.qos.logback.core.FileAppender">
+		<File>${DEV_HOME}/ultra-fitness-controllers.log</File>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>
+				[%date] [%-5level] [%thread] %logger{40} - %message%n
+			</pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="com.ultra.fitness.nutritions.service" class="ch.qos.logback.core.FileAppender">
+		<File>${DEV_HOME}/ultra-fitness-services.log</File>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>
+				[%date] [%-5level] [%thread] %logger{40} - %message%n
+			</pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="com.ultra.fitness.nutritions" class="ch.qos.logback.core.FileAppender">
+		<File>${DEV_HOME}/ultra-fitness-main.log</File>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>
+				[%date] [%-5level] [%thread] %logger{40} - %message%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="com.ultra.fitness.nutritions.controllers" level="info"
+		additivity="false">
+		<appender-ref ref="com.ultra.fitness.nutritions.controllers" />
+	</logger>
+	
+	<logger name="com.ultra.fitness.nutritions.service" level="info"
+		additivity="false">
+		<appender-ref ref="com.ultra.fitness.nutritions.service" />
+	</logger>
+	
+	<logger name="com.ultra.fitness.nutritions" level="info"
+		additivity="false">
+		<appender-ref ref="com.ultra.fitness.nutritions" />
+	</logger>
+	
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+	</root>
+
+</configuration>

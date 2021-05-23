@@ -1,11 +1,9 @@
 package com.ultra.fitness.nutritions.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-//import com.ultra.fitness.nutritions.Beans.User;
+import com.ultra.fitness.nutritions.utils.Constants;
 
-import api.communicator.manager.ApiCommunicationManager;
 import common.beans.User;
 import common.request.MainRequestObject;
 import common.response.MainResponseObject;
@@ -15,8 +13,6 @@ public class UserService {
 	
 //	@Autowired
 //	private User user;
-
-	public static String apiName = "createUser";
 	
 	public String userSignUp(User user) {
 		MainRequestObject request = null;
@@ -26,7 +22,7 @@ public class UserService {
 			request = new MainRequestObject();
 			user.setUsername("F15");
 			request.setUserInfo(user);
-			response = ApiCommunicatorService.postRequest(request,apiName);
+			response = ApiCommunicatorService.postRequest(request, Constants.CREATE_USER);
 			responseCode = response.getResponseCode();
 		} catch (Exception e) {
 			e.printStackTrace();
