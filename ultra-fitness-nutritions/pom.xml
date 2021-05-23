@@ -46,6 +46,41 @@
 		    <artifactId>tomcat-jasper</artifactId>
 		    <version>9.0.22</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-thymeleaf</artifactId>
+		    <version>2.5.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>common-beans</groupId>
+			<artifactId>common-beans</artifactId>
+			<version>0.0.1</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/common-beans-0.0.1.jar</systemPath>
+		</dependency>
+		
+		<dependency>
+			<groupId>api-communicator</groupId>
+			<artifactId>api-communicator</artifactId>
+			<version>0.0.1</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/api-communicator-0.0.1.jar</systemPath>
+		</dependency>
+		
+			<dependency>
+			   <groupId>org.json</groupId>
+			   <artifactId>json</artifactId>
+			   <version>20080701</version>
+			</dependency>
+			
+			<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+			<dependency>
+			    <groupId>com.google.code.gson</groupId>
+			    <artifactId>gson</artifactId>
+			
+			</dependency>
 	</dependencies>
 
 	<build>

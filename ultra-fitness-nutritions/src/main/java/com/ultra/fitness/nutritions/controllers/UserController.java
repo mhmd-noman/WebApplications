@@ -1,30 +1,43 @@
 package com.ultra.fitness.nutritions.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import com.ultra.fitness.nutritions.service.UserService;
+
+import common.beans.User;
 
 @Controller
+@RequestMapping("/user")
 public class UserController {
 	
-	@RequestMapping(value = "/")
-	public String user() {
-		
-	    return "index";
-	}
+	@Autowired
+	private UserService userService;
 	
-	@RequestMapping("/user/{id}")
-	public String developer(@PathVariable Long id) {
-		return "product-list.html";
-	}
-	
-	private void generateException(){
-	    throw new IndexOutOfBoundsException();      
+	public UserController(UserService userService) {
+		super();
+		this.userService=userService;
 	}
 
-	private ModelAndView handleException(){
-	     return new ModelAndView("error.jsp");
+	@ModelAttribute("user")
+	public User user() {
+		return new User();
 	}
-
+	
+	@GetMapping
+	public String showLoginPage() {
+		return "login";
+	}
+	
+	@PostMapping
+	public String userSignUp(@ModelAttribute("user") User user) {
+		String response = userService.userSignUp(user);
+		if ("100".equalsIgnoreCase(response)) {
+			return "redirect:/user?success";
+		}
+		return "redirect:/user?fail";
+	}
 }
