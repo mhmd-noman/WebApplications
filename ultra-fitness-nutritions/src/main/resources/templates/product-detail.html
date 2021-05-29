@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="utf-8">
         <title>E Store - eCommerce HTML Template</title>
@@ -120,8 +120,8 @@
         <div class="breadcrumb-wrap">
             <div class="container-fluid">
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Products</a></li>
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="product/get-products">Products</a></li>
                     <li class="breadcrumb-item active">Product Detail</li>
                 </ul>
             </div>
@@ -155,43 +155,39 @@
                                 </div>
                                 <div class="col-md-7">
                                     <div class="product-content">
-                                        <div class="title"><h2>Product Name</h2></div>
-                                        <div class="ratting">
+                                        <div class="title"><h2 th:text="${product.name} + ' ' + ${product.weight}"></h2></div>
+                                        
+                                        <!-- <div class="ratting">
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
-                                        </div>
+                                        </div> -->
+                                        
                                         <div class="price">
                                             <h4>Price:</h4>
-                                            <p>$99 <span>$149</span></p>
+                                            <p><span th:text="'Rs ' + ${product.orgPrice}"></span></p>
                                         </div>
                                         <div class="quantity">
-                                            <h4>Quantity:</h4>
+                                            <h4>Quantity:<span style=" font-size:10.0pt" th:text="'(In Stock:' +${product.quantity}+ ')'" > </span></h4>
                                             <div class="qty">
                                                 <button class="btn-minus"><i class="fa fa-minus"></i></button>
                                                 <input type="text" value="1">
                                                 <button class="btn-plus"><i class="fa fa-plus"></i></button>
                                             </div>
                                         </div>
+                                        
                                         <div class="p-size">
-                                            <h4>Size:</h4>
-                                            <div class="btn-group btn-group-sm">
-                                                <button type="button" class="btn">S</button>
-                                                <button type="button" class="btn">M</button>
-                                                <button type="button" class="btn">L</button>
-                                                <button type="button" class="btn">XL</button>
-                                            </div> 
+                                        	<h5 th:text="'Weight(Pounds): ' + ${product.weight} + ' lbs'"></h5>
+                                        	<h5 th:text="'Weight(Kilograms): ' + ${product.weight} + ' kgs'"></h5>
+                                        	<h5 th:text="'Servings: ' + ${product.servings}"></h5>
                                         </div>
+
                                         <div class="p-color">
-                                            <h4>Color:</h4>
-                                            <div class="btn-group btn-group-sm">
-                                                <button type="button" class="btn">White</button>
-                                                <button type="button" class="btn">Black</button>
-                                                <button type="button" class="btn">Blue</button>
-                                            </div> 
+                                            <h4 th:text="'Flavor: ' + ${product.flavour}"></h4>
                                         </div>
+                                        
                                         <div class="action">
                                             <a class="btn" href="#"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
                                             <a class="btn" href="#"><i class="fa fa-shopping-bag"></i>Buy Now</a>
@@ -216,12 +212,12 @@
                                 </ul>
 
                                 <div class="tab-content">
+                                
                                     <div id="description" class="container tab-pane active">
                                         <h4>Product description</h4>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In condimentum quam ac mi viverra dictum. In efficitur ipsum diam, at dignissim lorem tempor in. Vivamus tempor hendrerit finibus. Nulla tristique viverra nisl, sit amet bibendum ante suscipit non. Praesent in faucibus tellus, sed gravida lacus. Vivamus eu diam eros. Aliquam et sapien eget arcu rhoncus scelerisque. Suspendisse sit amet neque neque. Praesent suscipit et magna eu iaculis. Donec arcu libero, commodo ac est a, malesuada finibus dolor. Aenean in ex eu velit semper fermentum. In leo dui, aliquet sit amet eleifend sit amet, varius in turpis. Maecenas fermentum ut ligula at consectetur. Nullam et tortor leo. 
-                                        </p>
+                                        <p th:text="${product.description}"> </p>
                                     </div>
+                                    
                                     <div id="specification" class="container tab-pane fade">
                                         <h4>Product specification</h4>
                                         <ul>

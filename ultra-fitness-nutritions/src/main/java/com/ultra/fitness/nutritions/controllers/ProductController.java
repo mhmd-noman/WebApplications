@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ultra.fitness.nutritions.service.ProductService;
 import com.ultra.fitness.nutritions.utils.Utilities;
@@ -25,7 +26,7 @@ public class ProductController {
 	private MainResponseObject response;
 	private MainRequestObject request;
 
-	@RequestMapping(value="/getProducts", method = RequestMethod.GET)
+	@RequestMapping(value="/get-products", method = RequestMethod.GET)
 	public String getProducts(Model model) {
 		request = new MainRequestObject();
 		request.setProductInfo(new Product());
@@ -36,5 +37,20 @@ public class ProductController {
 			model.addAttribute("products", response.getProducts());
 		}
 		return "product-list";
+	}
+	
+	@RequestMapping(value="/get-product-detail", method = RequestMethod.GET)
+	public String getProductDetail(@RequestParam Integer id, @RequestParam String name, Model model) {
+		request = new MainRequestObject();
+		Product product = new Product();
+		product.setId(id);
+		request.setProductInfo(product);
+		logger.info(logger.isInfoEnabled() ? "Going to get product detail for product[" +id+ "] from Product controller ...": null);
+		response = productService.getProducts(request);
+		logger.info(logger.isInfoEnabled() ? "Response Received: [ " +response.getResponseCode()+ " ][" +response.getResponseDesc()+ "]": null);
+		if (!Utilities.isNullOrEmptyCollection(response.getProducts())) {
+			model.addAttribute("product", response.getProducts().get(0));
+		}
+		return "product-detail";
 	}
 }
