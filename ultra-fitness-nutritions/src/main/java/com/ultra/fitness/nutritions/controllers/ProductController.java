@@ -43,6 +43,9 @@ public class ProductController {
 	public String getProductDetail(@RequestParam Integer id, @RequestParam String name, Model model) {
 		request = new MainRequestObject();
 		Product product = new Product();
+		if (id == null || id < 1) {
+			id = 1;
+		}
 		product.setId(id);
 		request.setProductInfo(product);
 		logger.info(logger.isInfoEnabled() ? "Going to get product detail for product[" +id+ "] from Product controller ...": null);
