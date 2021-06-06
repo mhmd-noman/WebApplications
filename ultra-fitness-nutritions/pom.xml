@@ -69,6 +69,22 @@
 			<systemPath>${project.basedir}/lib/api-communicator-0.0.1.jar</systemPath>
 		</dependency>
 		
+		<dependency>
+			<groupId>common-exception-handling</groupId>
+			<artifactId>common-exception-handling</artifactId>
+			<version>0.0.1</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/common-exception-handling-0.0.1.jar</systemPath>
+		</dependency>
+		
+		<dependency>
+			<groupId>common-utilities</groupId>
+			<artifactId>common-utilities</artifactId>
+			<version>0.0.1</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/common-utilities-0.0.1.jar</systemPath>
+		</dependency>
+		
 			<dependency>
 			   <groupId>org.json</groupId>
 			   <artifactId>json</artifactId>
