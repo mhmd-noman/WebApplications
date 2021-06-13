@@ -54,8 +54,8 @@
                         <div class="navbar-nav mr-auto">
                             <a href="/" class="nav-item nav-link">Home</a>
                             <a href="/product/get-products" class="nav-item nav-link">Products</a>
-                            <a href="cart.html" class="nav-item nav-link">Cart</a>
-                            <a href="checkout.html" class="nav-item nav-link">Checkout</a>
+                            <a href="/cart/show-cart" class="nav-item nav-link">Cart</a>
+                            <a href="/order/checkout" class="nav-item nav-link">Checkout</a>
                             <a href="my-account.html" class="nav-item nav-link">My Account</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">More Pages</a>
@@ -136,20 +136,20 @@
                             <div class="row align-items-center">
                                 <div class="col-md-5">
                                     <div class="product-slider-single normal-slider">
-                                        <img src="/img/product-1.jpg" alt="Product Image">
-                                        <img src="/img/product-3.jpg" alt="Product Image">
-                                        <img src="/img/product-5.jpg" alt="Product Image">
-                                        <img src="/img/product-7.jpg" alt="Product Image">
-                                        <img src="/img/product-9.jpg" alt="Product Image">
-                                        <img src="/img/product-10.jpg" alt="Product Image">
+                                        <img th:src="${product.imagePath}" alt="Product Image">
+                                       <!--  <img th:src="${product.imagePath2}" alt="Product Image">
+                                        <img th:src="${product.imagePath3}" alt="Product Image">
+                                        <img th:src="${product.imagePath4}" alt="Product Image">
+                                        <img th:src="${product.imagePath5}" alt="Product Image">
+                                        --> <!-- <img src="${product.imagePath1}" alt="Product Image">	-->
                                     </div>
                                     <div class="product-slider-single-nav normal-slider">
-                                        <div class="slider-nav-img"><img src="/img/product-1.jpg" alt="Product Image"></div>
-                                        <div class="slider-nav-img"><img src="/img/product-3.jpg" alt="Product Image"></div>
-                                        <div class="slider-nav-img"><img src="/img/product-5.jpg" alt="Product Image"></div>
-                                        <div class="slider-nav-img"><img src="/img/product-7.jpg" alt="Product Image"></div>
-                                        <div class="slider-nav-img"><img src="/img/product-9.jpg" alt="Product Image"></div>
-                                        <div class="slider-nav-img"><img src="/img/product-10.jpg" alt="Product Image"></div>
+                                        <div class="slider-nav-img"><img th:src="${product.imagePath}" alt="Product Image"></div>
+                                      <!--   <div class="slider-nav-img"><img th:src="${product.imagePath2}" alt="Product Image"></div>
+                                        <div class="slider-nav-img"><img th:src="${product.imagePath3}" alt="Product Image"></div>
+                                        <div class="slider-nav-img"><img th:src="${product.imagePath4}" alt="Product Image"></div>
+                                        <div class="slider-nav-img"><img th:src="${product.imagePath5}" alt="Product Image"></div>
+                                       -->  <!--  <div class="slider-nav-img"><img src="${product.imagePath1}" alt="Product Image"></div>	-->
                                     </div>
                                 </div>
                                 <div class="col-md-7">

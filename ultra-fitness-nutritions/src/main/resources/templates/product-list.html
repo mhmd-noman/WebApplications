@@ -54,8 +54,8 @@
                         <div class="navbar-nav mr-auto">
                             <a class="nav-item nav-link" th:href="@{/}">Home</a>
                             <a class="nav-item nav-link active" th:href="@{/product-list.html}">Products</a>
-                            <a href="cart.html" class="nav-item nav-link">Cart</a>
-                            <a href="checkout.html" class="nav-item nav-link">Checkout</a>
+                            <a href="/cart/show-cart" class="nav-item nav-link">Cart</a>
+                            <a href="/order/checkout" class="nav-item nav-link">Checkout</a>
                             <a href="my-account.html" class="nav-item nav-link">My Account</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">More Pages</a>
@@ -196,7 +196,7 @@
                                     </div>
                                     <div class="product-image" th:onClick= "redirectToDetail([[${product.id}]], [[${product.name}]]);">
                                         <a href="#" th:href="@{/product/get-product-detail(id=${product.id}, name=${product.name})}">
-                                            <img src="/img/product-1.jpg" alt="Product Image">
+                                            <img th:src=${product.imagePath} alt="Product Image">
                                         </a>
                                         <div class="product-action">
                                             <a href="#"><i class="fa fa-cart-plus"></i></a>
@@ -220,9 +220,9 @@
                                     <li class="page-item disabled">
                                         <a class="page-link" href="#" tabindex="-1">Previous</a>
                                     </li>
-                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item active"><a class="page-link" th:href="@{/product-list.html}">1</a></li>
+                                    <li class="page-item"><a class="page-link" th:href="@{/product-list.html}">2</a></li>
+                                    <li class="page-item"><a class="page-link" th:href="@{/product-list.html}">3</a></li>
                                     <li class="page-item">
                                         <a class="page-link" href="#">Next</a>
                                     </li>

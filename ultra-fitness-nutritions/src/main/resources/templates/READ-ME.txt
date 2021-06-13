@@ -1,8 +1,8 @@
 TODOs at Backend(APIs):
 
-to send weight in Kg as well from getProducts api.
-to verify that retail price should be returned in response.
-Make sure to add units with weight from client backend or from server backend.
+to send weight in Kg as well from getProducts api. -Done
+to verify that retail price should be returned in response.   -Done
+Make sure to add units with weight from client backend or from server backend.  Done
 
 
 
