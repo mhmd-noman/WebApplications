@@ -14,6 +14,7 @@ public class CartController {
 
 	@RequestMapping(value="/show-cart", method = RequestMethod.GET)
 	public String getProducts(Model model) {
+		logger.info(logger.isInfoEnabled() ? "ladning to cart": null);
 		return "cart";
 	}
 	

@@ -196,7 +196,7 @@
                                     </div>
                                     <div class="product-image" th:onClick= "redirectToDetail([[${product.id}]], [[${product.name}]]);">
                                         <a href="#" th:href="@{/product/get-product-detail(id=${product.id}, name=${product.name})}">
-                                            <img th:src=${product.imagePath} alt="Product Image">
+                                            <img th:src=${product.imagePath1} alt="Product Image">
                                         </a>
                                         <div class="product-action">
                                             <a href="#"><i class="fa fa-cart-plus"></i></a>
@@ -217,14 +217,14 @@
                         <div class="col-md-12">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-center">
-                                    <li class="page-item disabled">
-                                        <a class="page-link" href="#" tabindex="-1">Previous</a>
+                                    <li th:if="${currentPage  != 1}" class="page-item">
+                                        <a class="page-link" th:href="@{/product/get-products-with-page(page=${currentPage-1})}" tabindex="-1">Previous</a>
                                     </li>
-                                    <li class="page-item active"><a class="page-link" th:href="@{/product-list.html}">1</a></li>
-                                    <li class="page-item"><a class="page-link" th:href="@{/product-list.html}">2</a></li>
-                                    <li class="page-item"><a class="page-link" th:href="@{/product-list.html}">3</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">Next</a>
+                                    
+                                    <li th:classappend="${currentPage == i ? 'active': ''}" th:each="i : ${#numbers.sequence(1, totalPages)}" class="page-item"><a class="page-link" th:href="@{/product/get-products-with-page(page=${i})}"><span th:text="${i}"></span></a></li>
+                                    
+                                    <li th:if="${currentPage != totalPages}" class="page-item">
+                                        <a class="page-link" th:href="@{/product/get-products-with-page(page=${currentPage+1})}">Next</a>
                                     </li>
                                 </ul>
                             </nav>
@@ -495,6 +495,11 @@
         	
         	function redirectToDetail(id, name) {
         		window.location.href = "/product/get-product-detail?id=" +id+ "&name=" +name;
+        	}
+        	
+        	function redirectToPage(pageNo) {
+        		pageNo = pageNo.innerHTML;
+        		window.location.href = "/product/get-products-with-page?pageNo=" +pageNo;
         	}
         	
         </script>

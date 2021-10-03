@@ -1,15 +1,19 @@
 package com.ultra.fitness.nutritions.controllers;
 
+import java.util.ArrayList;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ultra.fitness.nutritions.service.ProductService;
+import com.ultra.fitness.nutritions.utils.Constants;
 import com.ultra.fitness.nutritions.utils.Utilities;
 
 import common.beans.Product;
@@ -30,11 +34,41 @@ public class ProductController {
 	public String getProducts(Model model) {
 		request = new MainRequestObject();
 		request.setProductInfo(new Product());
+		request.setPageNo(Constants.DEFAULT_PAGE_NO);
+		request.setPageSize(Constants.DEFAULT_PAGE_SIZE);
+		request.setReturnCount(true);
 		logger.info(logger.isInfoEnabled() ? "Going to get products from Product controller ...": null);
 		response = productService.getProducts(request);
 		logger.info(logger.isInfoEnabled() ? "Response Received: [ " +response.getResponseCode()+ " ][" +response.getResponseDesc()+ "]": null);
+		model.addAttribute("currentPage", Constants.DEFAULT_PAGE_NO);
 		if (!Utilities.isNullOrEmptyCollection(response.getProducts())) {
+			model.addAttribute("totalPages", java.lang.Math.ceil(response.getProducts().size()/Constants.DEFAULT_PAGE_SIZE + 1));
 			model.addAttribute("products", response.getProducts());
+		} else {
+			model.addAttribute("totalPages", response.getTransCount()/Constants.DEFAULT_PAGE_SIZE + 1);
+			model.addAttribute("products", new ArrayList<Product>());
+		}
+		return "product-list";
+	}
+
+	@RequestMapping(value="/get-products-with-page", method = RequestMethod.GET)
+	public String getProductDetail(@RequestParam Integer page, Model model) {
+		request = new MainRequestObject();
+		Product product = new Product();
+		request.setPageNo(page);
+		request.setPageSize(Constants.DEFAULT_PAGE_SIZE);
+		request.setProductInfo(product);
+		request.setReturnCount(true);
+		logger.info(logger.isInfoEnabled() ? "Going to get products for pageNo[" +page+ "] from Product controller ...": null);
+		response = productService.getProducts(request);
+		logger.info(logger.isInfoEnabled() ? "Response Received: [ " +response.getResponseCode()+ " ][" +response.getResponseDesc()+ "]": null);
+		model.addAttribute("currentPage", page);
+		if (!Utilities.isNullOrEmptyCollection(response.getProducts())) {
+			model.addAttribute("totalPages", response.getTransCount()/Constants.DEFAULT_PAGE_SIZE + 1);
+			model.addAttribute("products", response.getProducts());
+		} else {
+			model.addAttribute("totalPages", response.getTransCount()/Constants.DEFAULT_PAGE_SIZE + 1);
+			model.addAttribute("products", new ArrayList<Product>());
 		}
 		return "product-list";
 	}

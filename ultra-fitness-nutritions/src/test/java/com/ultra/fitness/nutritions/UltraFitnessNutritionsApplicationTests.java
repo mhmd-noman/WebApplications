@@ -15,7 +15,7 @@ import common.utilities.methods.Utils;
 class UltraFitnessNutritionsApplicationTests {
 	
 	@Autowired
-	private static UserService userService;
+	public static UserService userService;
 	@Autowired
 	private static ProductService productService;
 	
@@ -42,7 +42,7 @@ class UltraFitnessNutritionsApplicationTests {
 		}
 	}
 	
-	private static void addProduct(ProductService productService) {
+	public static void addProduct(ProductService productService) {
 		MainRequestObject request = new MainRequestObject();
 		MainResponseObject response = new MainResponseObject();
 		Product product = new Product();
@@ -59,7 +59,7 @@ class UltraFitnessNutritionsApplicationTests {
 		}
 	}
 	
-	private static void updateProduct(ProductService productService) {
+	public static void updateProduct(ProductService productService) {
 		MainRequestObject request = new MainRequestObject();
 		MainResponseObject response = new MainResponseObject();
 		Product product = new Product();
@@ -76,7 +76,7 @@ class UltraFitnessNutritionsApplicationTests {
 		}
 	}
 	
-	private static void removeProduct(ProductService productService) {
+	public static void removeProduct(ProductService productService) {
 		MainRequestObject request = new MainRequestObject();
 		MainResponseObject response = new MainResponseObject();
 		Product product = new Product();

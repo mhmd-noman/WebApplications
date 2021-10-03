@@ -14,6 +14,7 @@ public class OrderController {
 
 	@RequestMapping(value="/checkout", method = RequestMethod.GET)
 	public String getProducts(Model model) {
+		logger.info(logger.isInfoEnabled() ? "ladning to getting product": null);
 		return "checkout";
 	}
 }
