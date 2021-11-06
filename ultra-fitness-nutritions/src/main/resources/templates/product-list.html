@@ -159,16 +159,16 @@
                                                 <div class="dropdown">
                                                     <div class="dropdown-toggle" data-toggle="dropdown">Product price range</div>
                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                        <a href="#" class="dropdown-item">$0 to $50</a>
-                                                        <a href="#" class="dropdown-item">$51 to $100</a>
-                                                        <a href="#" class="dropdown-item">$101 to $150</a>
-                                                        <a href="#" class="dropdown-item">$151 to $200</a>
-                                                        <a href="#" class="dropdown-item">$201 to $250</a>
-                                                        <a href="#" class="dropdown-item">$251 to $300</a>
-                                                        <a href="#" class="dropdown-item">$301 to $350</a>
-                                                        <a href="#" class="dropdown-item">$351 to $400</a>
-                                                        <a href="#" class="dropdown-item">$401 to $450</a>
-                                                        <a href="#" class="dropdown-item">$451 to $500</a>
+                                                        <div id= "range1" class="dropdown-item" th:onClick= "redirectToGetProductsByPriceRange(document.getElementById('range1').innerHTML)">0Rs to 5000Rs</div>
+                                                        <div id= "range2" class="dropdown-item" th:onClick= "redirectToGetProductsByPriceRange(document.getElementById('range2').innerHTML)">5000Rs to 10000Rs</div>
+                                                        <div id= "range3" class="dropdown-item" th:onClick= "redirectToGetProductsByPriceRange(document.getElementById('range3').innerHTML)">10000Rs to 15000Rs</div>
+                                                        <div id= "range4" class="dropdown-item" th:onClick= "redirectToGetProductsByPriceRange(document.getElementById('range4').innerHTML)">15000Rs to 20000Rs</div>
+                                                        <div id= "range5" class="dropdown-item" th:onClick= "redirectToGetProductsByPriceRange(document.getElementById('range5').innerHTML)">20000Rs to 25000Rs</div>
+                                                        <div id= "range6" class="dropdown-item" th:onClick= "redirectToGetProductsByPriceRange(document.getElementById('range6').innerHTML)">25000Rs to 30000Rs</div>
+                                                        <div id= "range7" class="dropdown-item" th:onClick= "redirectToGetProductsByPriceRange(document.getElementById('range7').innerHTML)">30000Rs to 35000Rs</div>
+                                                        <div id= "range8" class="dropdown-item" th:onClick= "redirectToGetProductsByPriceRange(document.getElementById('range8').innerHTML)">35000Rs to 40000Rs</div>
+                                                        <div id= "range9" class="dropdown-item" th:onClick= "redirectToGetProductsByPriceRange(document.getElementById('range9').innerHTML)">40000Rs to 45000Rs</div>
+                                                        <div id= "range10" class="dropdown-item" th:onClick= "redirectToGetProductsByPriceRange(document.getElementById('range10').innerHTML)">45000Rs to 50000Rs</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -384,6 +384,8 @@
                     <div class="brand-item"><img src="/img/brand-4.png" alt=""></div>
                     <div class="brand-item"><img src="/img/brand-5.png" alt=""></div>
                     <div class="brand-item"><img src="/img/brand-6.png" alt=""></div>
+                    <div class="brand-item"><img src="/img/brand-7.jpg" width="150" height="80" alt=""></div>
+                    <div class="brand-item"><img src="/img/brand-8.jpg" width="150" height="80" alt=""></div>
                 </div>
             </div>
         </div>
@@ -495,6 +497,14 @@
         	
         	function redirectToDetail(id, name) {
         		window.location.href = "/product/get-product-detail?id=" +id+ "&name=" +name;
+        	}
+        	
+        	function redirectToGetProductsByPriceRange(range) {
+        		var text = range + '';
+        		const myArray = text.split('to');
+        		const minValue = myArray[0].split('Rs');
+        		const maxValue = myArray[1].split('Rs');
+        		window.location.href = "/product/get-products-by-price-range?minPrice=" +minValue[0].trim()+ "&maxPrice=" +maxValue[0].trim();
         	}
         	
         	function redirectToPage(pageNo) {

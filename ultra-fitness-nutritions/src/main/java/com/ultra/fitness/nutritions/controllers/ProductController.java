@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,8 +43,11 @@ public class ProductController {
 		if (!Utilities.isNullOrEmptyCollection(response.getProducts())) {
 			model.addAttribute("totalPages", java.lang.Math.ceil(response.getProducts().size()/Constants.DEFAULT_PAGE_SIZE + 1));
 			model.addAttribute("products", response.getProducts());
-		} else {
+		} else if (!Utilities.validateIfNullOrInvalidInteger(response.getTransCount())) {
 			model.addAttribute("totalPages", response.getTransCount()/Constants.DEFAULT_PAGE_SIZE + 1);
+			model.addAttribute("products", new ArrayList<Product>());
+		} else {
+			model.addAttribute("totalPages", Constants.ZERO);
 			model.addAttribute("products", new ArrayList<Product>());
 		}
 		return "product-list";
@@ -66,8 +68,11 @@ public class ProductController {
 		if (!Utilities.isNullOrEmptyCollection(response.getProducts())) {
 			model.addAttribute("totalPages", response.getTransCount()/Constants.DEFAULT_PAGE_SIZE + 1);
 			model.addAttribute("products", response.getProducts());
-		} else {
+		} else if (!Utilities.validateIfNullOrInvalidInteger(response.getTransCount())) {
 			model.addAttribute("totalPages", response.getTransCount()/Constants.DEFAULT_PAGE_SIZE + 1);
+			model.addAttribute("products", new ArrayList<Product>());
+		} else {
+			model.addAttribute("totalPages", Constants.ZERO);
 			model.addAttribute("products", new ArrayList<Product>());
 		}
 		return "product-list";
@@ -89,5 +94,44 @@ public class ProductController {
 			model.addAttribute("product", response.getProducts().get(0));
 		}
 		return "product-detail";
+	}
+	
+	@RequestMapping(value="/get-products-by-price-range", method = RequestMethod.GET)
+	public String getProductsByPriceRange(Model model, @RequestParam Double minPrice, @RequestParam Double maxPrice) {
+		request = new MainRequestObject();
+		request.setProductInfo(new Product());
+		request.setPageNo(Constants.DEFAULT_PAGE_NO);
+		request.setPageSize(Constants.DEFAULT_PAGE_SIZE);
+		request.setReturnCount(true);
+		
+		model.getAttribute("mixValue");
+		model.getAttribute("maxValue");
+		
+		if (!Utilities.validateIfNullOrInvalidDouble(minPrice) && minPrice > Constants.NEGATIVE_ONE) {
+			request.getProductInfo().setFromOrgPrice(minPrice);
+		} else {
+			request.getProductInfo().setFromOrgPrice(Constants.LOWER_LIMIT_PRICE);
+		}
+		if (!Utilities.validateIfNullOrInvalidDouble(maxPrice) && maxPrice > Constants.NEGATIVE_ONE) {
+			request.getProductInfo().setToOrgPrice(maxPrice);
+		} else {
+			request.getProductInfo().setToOrgPrice(Constants.UPPER_LIMIT_PRICE);
+		}
+		
+		logger.info(logger.isInfoEnabled() ? "Going to get products from Product controller ...": null);
+		response = productService.getProducts(request);
+		logger.info(logger.isInfoEnabled() ? "Response Received: [ " +response.getResponseCode()+ " ][" +response.getResponseDesc()+ "]": null);
+		model.addAttribute("currentPage", Constants.DEFAULT_PAGE_NO);
+		if (!Utilities.isNullOrEmptyCollection(response.getProducts())) {
+			model.addAttribute("totalPages", java.lang.Math.ceil(response.getProducts().size()/Constants.DEFAULT_PAGE_SIZE + 1));
+			model.addAttribute("products", response.getProducts());
+		} else if (!Utilities.validateIfNullOrInvalidInteger(response.getTransCount())) {
+			model.addAttribute("totalPages", response.getTransCount()/Constants.DEFAULT_PAGE_SIZE + 1);
+			model.addAttribute("products", new ArrayList<Product>());
+		} else {
+			model.addAttribute("totalPages", Constants.ZERO);
+			model.addAttribute("products", new ArrayList<Product>());
+		}
+		return "product-list";
 	}
 }
