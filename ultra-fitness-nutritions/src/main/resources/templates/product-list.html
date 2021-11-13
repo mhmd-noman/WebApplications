@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="utf-8">
-        <title>E Store - eCommerce HTML Template</title>
+        <title>Products - Ultra Fitness</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="eCommerce HTML Template Free Download" name="keywords">
         <meta content="eCommerce HTML Template Free Download" name="description">
@@ -94,8 +94,8 @@
                     </div>
                     <div class="col-md-6">
                         <div class="search">
-                            <input type="text" placeholder="Search">
-                            <button><i class="fa fa-search"></i></button>
+                            <input id="textToBeSearched" type="text" placeholder="Search">
+                            <button id="searchButton" th:onClick= "redirectToGetRequestedProduct(document.getElementById('textToBeSearched').value)"><i class="fa fa-search"></i></button>
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -115,18 +115,6 @@
         </div>
         <!-- Bottom Bar End -->  
         
-        <!-- Breadcrumb Start -->
-        <div class="breadcrumb-wrap">
-            <div class="container-fluid">
-                <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Products</a></li>
-                    <li class="breadcrumb-item active">Product List</li>
-                </ul>
-            </div>
-        </div>
-        <!-- Breadcrumb End -->
-        
         <!-- Product List Start -->
         <div class="product-view">
             <div class="container-fluid">
@@ -136,12 +124,12 @@
                             <div class="col-md-12">
                                 <div class="product-view-top">
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <!-- <div class="col-md-4">
                                             <div class="product-search">
                                                 <input type="email" value="Search">
                                                 <button><i class="fa fa-search"></i></button>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="col-md-4">
                                             <div class="product-short">
                                                 <div class="dropdown">
@@ -351,22 +339,6 @@
                                 <li><a href="#">Sagittis</a><span>(28)</span></li>
                             </ul>
                         </div>
-                        
-                        <div class="sidebar-widget tag">
-                            <h2 class="title">Tags Cloud</h2>
-                            <a href="#">Lorem ipsum</a>
-                            <a href="#">Vivamus</a>
-                            <a href="#">Phasellus</a>
-                            <a href="#">pulvinar</a>
-                            <a href="#">Curabitur</a>
-                            <a href="#">Fusce</a>
-                            <a href="#">Sem quis</a>
-                            <a href="#">Mollis metus</a>
-                            <a href="#">Sit amet</a>
-                            <a href="#">Vel posuere</a>
-                            <a href="#">orci luctus</a>
-                            <a href="#">Nam lorem</a>
-                        </div>
                     </div>
                     <!-- Side Bar End -->
                 </div>
@@ -511,6 +483,18 @@
         		pageNo = pageNo.innerHTML;
         		window.location.href = "/product/get-products-with-page?pageNo=" +pageNo;
         	}
+        	
+        	function redirectToGetRequestedProduct(productName) {
+        		window.location.href = "/product/get-requested-products?productName=" +productName;
+        	}
+        	
+        	var input = document.getElementById("textToBeSearched");
+        	input.addEventListener("keyup", function(event) {
+        	  if (event.keyCode === 13) {
+        	   event.preventDefault();
+        	   document.getElementById("searchButton").click();
+        	  }
+        	});
         	
         </script>
         
