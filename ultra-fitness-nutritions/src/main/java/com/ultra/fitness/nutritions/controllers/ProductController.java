@@ -103,6 +103,31 @@ public class ProductController {
 		return "product-list";
 	}
 	
+	@RequestMapping(value="/get-products-by-category", method = RequestMethod.GET)
+	public String getProductsByCategory(Model model,  @RequestParam String productCategory) {
+		request = new MainRequestObject();
+		request.setProductInfo(new Product());
+		request.setPageNo(Constants.DEFAULT_PAGE_NO);
+		request.setPageSize(Constants.DEFAULT_PAGE_SIZE);
+		request.setReturnCount(true);
+		request.getProductInfo().setCategory(productCategory);
+		logger.info(logger.isInfoEnabled() ? "Going to get products from Product controller on the basis of category ...": null);
+		response = productService.getProducts(request);
+		logger.info(logger.isInfoEnabled() ? "Response Received: [ " +response.getResponseCode()+ " ][" +response.getResponseDesc()+ "]": null);
+		model.addAttribute("currentPage", Constants.DEFAULT_PAGE_NO);
+		if (!Utilities.isNullOrEmptyCollection(response.getProducts())) {
+			model.addAttribute("totalPages", java.lang.Math.ceil(response.getProducts().size()/Constants.DEFAULT_PAGE_SIZE + 1));
+			model.addAttribute("products", response.getProducts());
+		} else if (!Utilities.validateIfNullOrInvalidInteger(response.getTransCount())) {
+			model.addAttribute("totalPages", response.getTransCount()/Constants.DEFAULT_PAGE_SIZE + 1);
+			model.addAttribute("products", new ArrayList<Product>());
+		} else {
+			model.addAttribute("totalPages", Constants.ZERO);
+			model.addAttribute("products", new ArrayList<Product>());
+		}
+		return "product-list";
+	}
+	
 	@RequestMapping(value="/get-product-detail", method = RequestMethod.GET)
 	public String getProductDetail(@RequestParam Integer id, @RequestParam String name, Model model) {
 		request = new MainRequestObject();

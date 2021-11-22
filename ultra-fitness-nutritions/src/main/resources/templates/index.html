@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="utf-8">
         <title>Home - Ultra Fitness</title>
@@ -94,8 +94,8 @@
                     </div>
                     <div class="col-md-6">
                         <div class="search">
-                            <input type="text" placeholder="Search">
-                            <button><i class="fa fa-search"></i></button>
+                            <input id="textToBeSearched" type="text" placeholder="Search">
+                            <button id="searchButton" th:onClick= "redirectToGetRequestedProduct(document.getElementById('textToBeSearched').value)"><i class="fa fa-search"></i></button>
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -120,35 +120,51 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-3">
-                        <nav class="navbar bg-light">
+                        <nav class="navbar bg-light" style="overflow: scroll;">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="fa fa-home"></i>Home</a>
+                                    <a class="nav-link" href="/">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="fa fa-shopping-bag"></i>Best Selling</a>
+                                    <a class="nav-link" href="/product/get-products-by-category?productCategory=Best Selling">Best Selling</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="fa fa-plus-square"></i>New Arrivals</a>
+                                    <a class="nav-link" href="/product/get-products-by-category?productCategory=New Arrivals">New Arrivals</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="fa fa-female"></i>Fashion & Beauty</a>
+                                    <a class="nav-link" href="/product/get-products-by-category?productCategory=Protein">Protein</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="fa fa-child"></i>Kids & Babies Clothes</a>
+                                    <a class="nav-link" href="/product/get-products-by-category?productCategory=Pre-Workout">Pre-Workout</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="fa fa-tshirt"></i>Men & Women Clothes</a>
+                                    <a class="nav-link" href="/product/get-products-by-category?productCategory=Intra-Workout">Intra-Workout</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="fa fa-mobile-alt"></i>Gadgets & Accessories</a>
+                                    <a class="nav-link" href="/product/get-products-by-category?productCategory=Post Workout">Post-Workout</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="fa fa-microchip"></i>Electronics & Accessories</a>
+                                    <a class="nav-link" href="/product/get-products-by-category?productCategory=Mass Gainer">Mass Gainer</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/product/get-products-by-category?productCategory=Creatine">Creatine</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/product/get-products-by-category?productCategory=Aminos">Aminos - BCAA</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/product/get-products-by-category?productCategory=Weight Loss">Weight Loss - Fat Burners</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/product/get-products-by-category?productCategory=Vitamins">Vitamins and Minerals</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/product/get-products-by-category?productCategory=Accessories">Apparel - Accessories</a>
                                 </li>
                             </ul>
                         </nav>
                     </div>
+                    
                     <div class="col-md-6">
                         <div class="header-slider normal-slider">
                             <div class="header-slider-item">
@@ -646,7 +662,7 @@
         <!-- Recent Product End -->
         
         <!-- Review Start -->
-        <div class="review">
+       <!--  <div class="review">
             <div class="container-fluid">
                 <div class="row align-items-center review-slider normal-slider">
                     <div class="col-md-6">
@@ -714,7 +730,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- Review End -->        
         
         <!-- Footer Start -->
@@ -817,5 +833,24 @@
         
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
-    </body>
+        
+          <!-- Custom Javascript Tuch -->
+	<script th:inline="javascript">
+		function redirectToGetRequestedProduct(productName) {
+			window.location.href = "/product/get-requested-products?productName="+ productName;
+		}
+
+		var input = document.getElementById("textToBeSearched");
+		input.addEventListener("keyup", function(event) {
+			if (event.keyCode === 13) {
+				event.preventDefault();
+				document.getElementById("searchButton").click();
+			}
+		});
+		
+		function redirectToGetProductsByCategory(productCategory) {
+			window.location.href = "/product/get-requested-products?productCategory="+ productCategory;
+		}
+	</script>
+</body>
 </html>
