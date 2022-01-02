@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.4.5</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.ultra.fitness.nutritions</groupId>
 	<artifactId>ultra-fitness-nutritions</artifactId>
@@ -14,7 +15,7 @@
 	<name>ultra-fitness-nutritions</name>
 	<description>Ultra Fitness Nutritions</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>16</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -42,61 +43,28 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-		    <groupId>org.apache.tomcat</groupId>
-		    <artifactId>tomcat-jasper</artifactId>
-		    <version>9.0.22</version>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-jasper</artifactId>
+			<version>9.0.22</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf -->
 		<dependency>
-		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-starter-thymeleaf</artifactId>
-		    
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+
 		</dependency>
-		
 		<dependency>
-			<groupId>common-beans</groupId>
-			<artifactId>common-beans</artifactId>
-			<version>0.0.1</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/common-beans-0.0.1.jar</systemPath>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20080701</version>
 		</dependency>
-		
+
+		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
 		<dependency>
-			<groupId>api-communicator</groupId>
-			<artifactId>api-communicator</artifactId>
-			<version>0.0.1</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/api-communicator-0.0.1.jar</systemPath>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+
 		</dependency>
-		
-		<dependency>
-			<groupId>common-exception-handling</groupId>
-			<artifactId>common-exception-handling</artifactId>
-			<version>0.0.1</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/common-exception-handling-0.0.1.jar</systemPath>
-		</dependency>
-		
-		<dependency>
-			<groupId>common-utilities</groupId>
-			<artifactId>common-utilities</artifactId>
-			<version>0.0.1</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/common-utilities-0.0.1.jar</systemPath>
-		</dependency>
-		
-			<dependency>
-			   <groupId>org.json</groupId>
-			   <artifactId>json</artifactId>
-			   <version>20080701</version>
-			</dependency>
-			
-			<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
-			<dependency>
-			    <groupId>com.google.code.gson</groupId>
-			    <artifactId>gson</artifactId>
-			
-			</dependency>
 	</dependencies>
 
 	<build>
@@ -107,5 +75,12 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<repositories>
+		<repository>
+			<id>localrepository</id>
+			<url>file://${project.basedir}/libs</url>
+		</repository>
+	</repositories>
 
 </project>

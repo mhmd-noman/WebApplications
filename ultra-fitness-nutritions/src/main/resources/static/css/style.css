@@ -473,7 +473,7 @@ h2 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 111, 97, .7);
+    
     transition: all 0.3s;
     z-index: 1;
 }

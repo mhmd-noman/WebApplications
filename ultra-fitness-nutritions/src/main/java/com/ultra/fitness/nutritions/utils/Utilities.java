@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Map;
 
 public class Utilities {
@@ -90,5 +91,19 @@ public class Utilities {
 			valid = false;
 		}
 		return valid;
+	}
+	
+	public static String formatDate(Date date, String format) {
+		if (isValidDate(date, format)) {
+			return new SimpleDateFormat(format).format(date);	
+		}
+		return null;
+	}
+	
+	public static Date formatDate(String date, String format) throws ParseException {
+		if (isValidDateForString(date, format)) {
+			return new SimpleDateFormat(format, Locale.ENGLISH).parse(date);	
+		}
+		return null;
 	}
 }

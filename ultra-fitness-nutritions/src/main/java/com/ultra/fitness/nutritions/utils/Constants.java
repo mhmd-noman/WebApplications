@@ -18,4 +18,6 @@ public class Constants {
 	public static final Double NEGATIVE_ONE       = -1.00;
 	public static final Double LOWER_LIMIT_PRICE  = 0.00;
 	public static final Double UPPER_LIMIT_PRICE  = 1000000.00;
+	
+	public static final String DATE_FORMAT        = "yyyy-mm-dd";
 }
